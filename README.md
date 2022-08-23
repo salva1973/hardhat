@@ -316,7 +316,7 @@ Migrate to Goerli on Alchemy.
 - npm install --save-dev @nomiclabs/buidler
 - console.log()
 
-## Updgrades
+## Upgrades
 
 - yarn outdated
 - yarn upgrade-interactive --latest
