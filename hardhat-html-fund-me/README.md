@@ -41,4 +41,3 @@ and get the address from the console.
 Or (easier) run the node from a second terminal from the front-end project.
 
 We need to connect Metamask to our local node.
-

@@ -344,3 +344,4 @@ Migrate to Goerli on Alchemy.
 - yarn hardhat node
 - yarn hardhat run scripts/fund.js --network localhost
 - yarn hardhat run scripts/withdraw.js --network localhost
+- create hardhat-localhost in Metamask
