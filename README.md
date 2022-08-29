@@ -345,3 +345,46 @@ Migrate to Goerli on Alchemy.
 - yarn hardhat run scripts/fund.js --network localhost
 - yarn hardhat run scripts/withdraw.js --network localhost
 - create hardhat-localhost in Metamask
+
+## Hardhat SmartContract Lottery
+
+- yarn add --dev hardhat
+- yarn hardhat -> Create an empty hardhat.config.js (this time from scratch)
+- yarn add --dev @nomiclabs/hardhat-ethers@npm:hardhat-deploy-ethers ethers @nomiclabs/hardhat-etherscan @nomiclabs/hardhat-waffle chai ethereum-waffle hardhat hardhat-contract-sizer hardhat-deploy hardhat-gas-reporter prettier prettier-plugin-solidity solhint solidity-coverage dotenv
+- we add the dependencies in our hardhat.config.js:
+
+```js
+require("@nomiclabs/hardhat-waffle")
+require("@nomiclabs/hardhat-etherscan")
+require("hardhat-deploy")
+require("solidity-coverage")
+require("hardhat-gas-reporter")
+require("hardhat-contract-sizer")
+require("dotenv").config()
+```
+
+- we create .prettierrc:
+
+```json
+{
+  "tabWidth": 2,
+  "useTabs": false,
+  "semi": false,
+  "singleQuote": true,
+  "printWidth": 100
+}
+```
+
+- we create the 'contracts' folder, and a new file 'Raffle.sol'
+- we prepare a list of the things to be done:
+
+Raffle contract
+Enter the lottery (paying some amount)
+Pick a random winner (verifiably random)
+Winner to be selected every X minutes -> completely automated
+Chainlink Oracle -> Randomness, Automated Execution
+
+- yarn hardhat compile (to check everything's fine)
+- to save gas: either we use storage, or even immutable when required
+- to save gas: use custom error instead of require (e.g. for entranceFee)
+****
