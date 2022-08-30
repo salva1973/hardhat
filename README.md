@@ -386,5 +386,10 @@ Chainlink Oracle -> Randomness, Automated Execution
 
 - yarn hardhat compile (to check everything's fine)
 - to save gas: either we use storage, or even immutable when required
-- to save gas: use custom error instead of require (e.g. for entranceFee)
-****
+- to save gas: use custom errors instead of require (e.g. for entranceFee)
+  (we store an error code instead of a string)
+
+## Events
+
+- topics -> indexed parameters
+- logs
