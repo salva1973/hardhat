@@ -354,13 +354,13 @@ Migrate to Goerli on Alchemy.
 - we add the dependencies in our hardhat.config.js:
 
 ```js
-require("@nomiclabs/hardhat-waffle")
-require("@nomiclabs/hardhat-etherscan")
-require("hardhat-deploy")
-require("solidity-coverage")
-require("hardhat-gas-reporter")
-require("hardhat-contract-sizer")
-require("dotenv").config()
+require('@nomiclabs/hardhat-waffle')
+require('@nomiclabs/hardhat-etherscan')
+require('hardhat-deploy')
+require('solidity-coverage')
+require('hardhat-gas-reporter')
+require('hardhat-contract-sizer')
+require('dotenv').config()
 ```
 
 - we create .prettierrc:
@@ -393,3 +393,8 @@ Chainlink Oracle -> Randomness, Automated Execution
 
 - topics -> indexed parameters
 - logs
+
+## Chainlink VRF (Randomness in Web3)
+
+- V2: funding a subscription (instead of using LINK). Subscription: account that helps to maintain
+  balance for multiple consumer contracts.

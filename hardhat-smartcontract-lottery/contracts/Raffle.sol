@@ -15,6 +15,9 @@ contract Raffle {
   uint256 private immutable i_entranceFee;
   address payable[] private s_players; // In Storage
 
+  /* Events */
+  event RaffleEnter(address indexed player);
+
   constructor(uint256 entranceFee) {
     i_entranceFee = entranceFee;
   }
@@ -26,6 +29,9 @@ contract Raffle {
     }
     s_players.push(payable(msg.sender));
     // Events
+    // Emit an event when we update a dynamic array or mapping
+    // Named events with the function name reversed
+    emit RaffleEnter(msg.sender);
   }
 
   // function pickRandomWinner(){}
