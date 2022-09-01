@@ -398,3 +398,19 @@ Chainlink Oracle -> Randomness, Automated Execution
 
 - V2: funding a subscription (instead of using LINK). Subscription: account that helps to maintain
   balance for multiple consumer contracts.
+- Randomness:
+  <https://docs.chain.link/docs/vrf/v2/examples/get-a-random-number/>
+- yarn add --dev @chainlink/contracts
+
+```solidity
+function fulfillRandomWords(uint256 requestId, uint256[] memory randomWords) internal virtual;
+```
+
+- virtual -> to be overridden
+- yarn hardhat compile
+- hardhat shortcut:
+- npm i -g hardhat-shorthand
+- in our case:
+- yarn global add hardhat-shortcut
+- now instead of yarn hardhat compile:
+- hh compile
