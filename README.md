@@ -414,3 +414,7 @@ function fulfillRandomWords(uint256 requestId, uint256[] memory randomWords) int
 - yarn global add hardhat-shortcut
 - now instead of yarn hardhat compile:
 - hh compile
+
+## Chainlink Keepers
+
+- to make things happen automatically, based on events, etc.
