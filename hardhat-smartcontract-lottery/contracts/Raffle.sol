@@ -10,11 +10,18 @@ pragma solidity ^0.8.9;
 
 import "@chainlink/contracts/src/v0.8/VRFConsumerBaseV2.sol";
 import "@chainlink/contracts/src/v0.8/interfaces/VRFCoordinatorV2Interface.sol";
+import "@chainlink/contracts/src/v0.8/interfaces/KeeperCompatibleInterface.sol";
 
 error Raffle__NotEnoughETHEntered();
 error Raffle__TransferFailed();
 
-contract Raffle is VRFConsumerBaseV2 {
+contract Raffle is VRFConsumerBaseV2, KeeperCompatibleInterface {
+  /* Type Declarations */
+  enum RaffleState {
+    OPEN,
+    CALCULATING
+  }// uint256 0 = OPEN, 1 = CALCULATING
+
   /* State Variables */
   uint256 private immutable i_entranceFee;
   address payable[] private s_players; // In Storage
@@ -27,6 +34,7 @@ contract Raffle is VRFConsumerBaseV2 {
 
   // Lottery Variables
   address private s_recentWinner;
+  RaffleState private s_raffleState; 
 
   /* Events */
   event RaffleEnter(address indexed player);
@@ -57,6 +65,31 @@ contract Raffle is VRFConsumerBaseV2 {
     // Emit an event when we update a dynamic array or mapping
     // Named events with the function name reversed
     emit RaffleEnter(msg.sender);
+  }
+
+  /**
+   * @dev This is the function that the Chainlink Keeper call
+   * they look for the `upkeepNeeded` to return true
+   * The following should be true in order to return true:
+   * 1. Our time interval should have passed
+   * 2. The lottery should have at least 1 player and have some ETH
+   * 3. Our subscription is funded with LINK
+   * 4. Lottery should be in a "open" state (it will be "closed")
+   * while waiting for a random number to get back
+   */
+  function checkUpkeep(
+    bytes calldata /* checkData */
+  )
+    external
+    view
+    override
+    returns (
+      bool upkeepNeeded,
+      bytes memory /* performData */
+    )
+  {
+    upkeepNeeded = (block.timestamp - lastTimeStamp) > interval;
+    // We don't use the checkData in this example. The checkData is defined when the Upkeep was registered.
   }
 
   // This will be called by the Chainlink Keeper network
