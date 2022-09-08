@@ -418,3 +418,9 @@ function fulfillRandomWords(uint256 requestId, uint256[] memory randomWords) int
 ## Chainlink Keepers
 
 - to make things happen automatically, based on events, etc.
+- Subscription Id:
+  <https://vrf.chain.link/>
+- Address to import to see LINK in Metamask (with Goerli):
+  <0x326C977E6efc84E512bB9C30f76E30c160eD06FB> (import token)
+- test:
+- hh deploy or yarn hardhat deploy
