@@ -424,3 +424,8 @@ function fulfillRandomWords(uint256 requestId, uint256[] memory randomWords) int
   <0x326C977E6efc84E512bB9C30f76E30c160eD06FB> (import token)
 - test:
 - hh deploy or yarn hardhat deploy
+
+## Unit tests
+
+- hh test (or yarn hardhat test)
+- hh test --grep "you don't pay enough" 
