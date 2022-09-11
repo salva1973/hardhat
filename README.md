@@ -428,4 +428,6 @@ function fulfillRandomWords(uint256 requestId, uint256[] memory randomWords) int
 ## Unit tests
 
 - hh test (or yarn hardhat test)
-- hh test --grep "you don't pay enough" 
+- hh test --grep "you don't pay enough"
+- hh coverage
+
