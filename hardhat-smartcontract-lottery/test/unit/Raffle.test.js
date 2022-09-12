@@ -87,4 +87,44 @@ const { developmentChains, networkConfig } = require('../../helper-hardhat-confi
           assert(upkeepNeeded)
         })
       })
+      describe('performUpkeep', function () {
+        it('it can only run if checkupkeep is true', async function () {
+          await raffle.enterRaffle({ value: raffleEntranceFee })
+          await network.provider.send('evm_increaseTime', [interval.toNumber() + 1])
+          await network.provider.request({ method: 'evm_mine', params: [] })
+          const tx = await raffle.performUpkeep('0x')
+          assert(tx)
+        })
+        it('reverts if checkupkeep is false', async () => {
+          await expect(raffle.performUpkeep('0x')).to.be.revertedWith('Raffle__UpkeepNotNeeded')
+        })
+        it('updates the raffle state, emits an event, and calls the vrf coordinator', async () => {
+          await raffle.enterRaffle({ value: raffleEntranceFee })
+          await network.provider.send('evm_increaseTime', [interval.toNumber() + 1])
+          await network.provider.request({ method: 'evm_mine', params: [] })
+          const txResponse = await raffle.performUpkeep('0x') // emits requestId
+          const txReceipt = await txResponse.wait(1) // waits 1 block
+          const requestId = txReceipt.events[1].args.requestId
+          const raffleState = await raffle.getRaffleState() // updates state
+
+          assert(requestId.toNumber() > 0)
+          assert(raffleState.toString() == '1') // 0 = open, 1 = calculating
+        })
+      })
+
+      describe('fulfillRandomWords', function () {
+        beforeEach(async () => {
+          await raffle.enterRaffle({ value: raffleEntranceFee })
+          await network.provider.send('evm_increaseTime', [interval.toNumber() + 1])
+          await network.provider.request({ method: 'evm_mine', params: [] })
+        })
+        it('can only be called after performUpkeep', async () => {
+          await expect(
+            vrfCoordinatorV2Mock.fulfillRandomWords(0, raffle.address) // reverts if not fulfilled
+          ).to.be.revertedWith('nonexistent request')
+          await expect(
+            vrfCoordinatorV2Mock.fulfillRandomWords(1, raffle.address) // reverts if not fulfilled
+          ).to.be.revertedWith('nonexistent request')
+        })
+      })
     })
