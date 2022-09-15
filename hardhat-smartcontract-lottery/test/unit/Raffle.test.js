@@ -4,7 +4,7 @@ const { developmentChains, networkConfig } = require('../../helper-hardhat-confi
 
 !developmentChains.includes(network.name)
   ? describe.skip
-  : describe('Raffle', function () {
+  : describe('Raffle Unit Tests', function () {
       let raffle, vrfCoordinatorV2Mock, raffleEntranceFee, deployer, interval
       const chainId = network.config.chainId
 
@@ -156,11 +156,11 @@ const { developmentChains, networkConfig } = require('../../helper-hardhat-confi
                 assert.equal(raffleState.toString(), '0') // OPEN
                 assert(endingTimeStamp > startingTimestamp)
                 assert.equal(winnerEndingBalance.toString(), winnerStartingBalance.add(raffleEntranceFee.mul(additionalEntrants).add(raffleEntranceFee).toString()))
-                resolve()
+                
               } catch (e) {
                 reject(e)
               }
-              
+              resolve()
             })
             // Setting up the listener
 
