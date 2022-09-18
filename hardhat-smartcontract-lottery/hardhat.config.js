@@ -37,6 +37,11 @@ module.exports = {
       accounts: [PRIVATE_KEY],
     },
   },
+  etherscan: {
+    apiKey: {
+      goerli: ETHERSCAN_API_KEY,
+    },
+  },
   gasReporter: {
     enabled: false,
     currency: 'USD',

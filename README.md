@@ -425,9 +425,14 @@ function fulfillRandomWords(uint256 requestId, uint256[] memory randomWords) int
 - test:
 - hh deploy or yarn hardhat deploy
 
-## Unit tests
+## Unit tests (on development network)
 
 - hh test (or yarn hardhat test)
 - hh test --grep "you don't pay enough"
 - hh coverage
 
+## Staging Test (on test Network Goerli)
+
+- yarn hardhat deploy --network goerli
+  or
+- hh deploy --network goerli

@@ -4,7 +4,13 @@ const { developmentChains, networkConfig } = require('../../helper-hardhat-confi
 
 // TO BE ABLE TO TEST ON TESTNET
 // 1. Get our SubId for Chainlink VRF
+// vrf.chain.link
+// Chain Id
+// Costs
+// https://docs.chain.link/docs/vrf/v2/supported-networks/
 // 2. Deploy our contract using the SUbId
+// https://goerli.etherscan.io/
+// https://goerli.etherscan.io/address/0x6a04aEdA490b7794982DEe1D56a801Aa6D533Ae2#code
 // 3. Register the contract with Chainlink VRF and its SubId
 // 4. Register the contract with Chainlink Keepers
 // 5. Run staging tests
