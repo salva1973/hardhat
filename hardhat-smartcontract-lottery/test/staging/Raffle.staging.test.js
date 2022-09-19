@@ -12,10 +12,11 @@ const { developmentChains, networkConfig } = require('../../helper-hardhat-confi
 // https://goerli.etherscan.io/
 // https://goerli.etherscan.io/address/0x6a04aEdA490b7794982DEe1D56a801Aa6D533Ae2#code
 // 3. Register the contract with Chainlink VRF and its SubId
+// keepers.chain.link
 // 4. Register the contract with Chainlink Keepers
 // 5. Run staging tests
 
-!developmentChains.includes(network.name)
+developmentChains.includes(network.name)
   ? describe.skip
   : describe('Raffle Staging Tests', function () {
       let raffle, raffleEntranceFee, deployer
@@ -62,7 +63,9 @@ const { developmentChains, networkConfig } = require('../../helper-hardhat-confi
             })
             // The entering the raffle
             console.log('Entering Raffle...')
-            await raffle.enterRaffle({ value: raffleEntranceFee })
+            const tx = await raffle.enterRaffle({ value: raffleEntranceFee })
+            await tx.wait(1)
+            console.log('Ok, time to wait...')
             const winnerStartingBalance = await accounts[0].getBalance()
           })
 

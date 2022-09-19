@@ -436,3 +436,4 @@ function fulfillRandomWords(uint256 requestId, uint256[] memory randomWords) int
 - yarn hardhat deploy --network goerli
   or
 - hh deploy --network goerli
+- hh test --network goerli
